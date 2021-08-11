@@ -2,10 +2,19 @@ defmodule MoneyTest do
   use ExUnit.Case
   doctest Money
 
+  test "mixed addition" do
+    five_bucks = Money.dollar(5)
+    ten_francs = Money.franc(10)
+    bank = Bank.add_rate(%Bank{}, "CHF", "USD", 2)
+    sum = Money.plus(five_bucks, ten_francs)
+    result = Bank.reduce(sum, bank, "USD")
+    assert Money.dollar(10) == result
+  end
+
   test "addition with bank" do
     five = Money.dollar(5)
     sum = Money.plus(five, five)
-    reduced = Bank.reduce(sum, "USD")
+    reduced = Bank.reduce(sum, %Bank{}, "USD")
     assert Money.dollar(10) == reduced
   end
 
@@ -19,18 +28,18 @@ defmodule MoneyTest do
   test "reduce sum" do
     five = Money.dollar(5)
     sum = %Sum{augend: five, addend: five}
-    reduced = Bank.reduce(sum, "USD")
+    reduced = Bank.reduce(sum, %Bank{}, "USD")
     assert Money.dollar(10) == reduced
   end
 
   test "reduce money" do
-    result = Bank.reduce(Money.dollar(1), "USD")
+    result = Bank.reduce(Money.dollar(1), %Bank{}, "USD")
     assert Money.dollar(1) == result
   end
 
   test "reduce money, different currency" do
     bank = Bank.add_rate(%Bank{}, "CHF", "USD", 2)
-    result = Bank.reduce(Money.franc(2), "USD", bank)
+    result = Bank.reduce(Money.franc(2), bank, "USD")
     assert Money.dollar(1) == result
   end
 

@@ -9,8 +9,8 @@ defmodule Money do
     %Money{amount: amount, currency: "CHF"}
   end
 
-  def plus(money, money) do
-    %Sum{augend: money, addend: money}
+  def plus(money, other_money) do
+    %Sum{augend: money, addend: other_money}
   end
 
   def times(money, multiplier) do

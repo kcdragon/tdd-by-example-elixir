@@ -9,10 +9,10 @@ defmodule Bank do
     Map.get(bank.rates, [source_currency, target_currency], 1)
   end
 
-  def reduce(expression, currency, bank \\ %Bank{}) do
+  def reduce(expression, bank, currency) do
     case expression do
       %Money{} -> Money.reduce(expression, bank, currency)
-      %Sum{} -> Sum.reduce(expression, currency)
+      %Sum{} -> Sum.reduce(expression, bank, currency)
     end
   end
 end
