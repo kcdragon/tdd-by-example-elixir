@@ -1,9 +1,8 @@
 defmodule Money do
-  def currency(money) do
-    case money do
-      %Dollar{} -> "USD"
-      %Franc{} -> "CHF"
-    end
+  defstruct [:amount, :currency]
+
+  def times(dollar, multiplier) do
+    %Money{amount: dollar.amount * multiplier, currency: dollar.currency}
   end
 
   def equals(money, other_money) do

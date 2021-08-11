@@ -14,6 +14,12 @@ defmodule MoneyTest do
     assert %Franc{amount: 15} == Franc.times(five, 3)
   end
 
+  test "multiplication" do
+    five = %Money{amount: 5, currency: 'USD'}
+    assert %Money{amount: 10, currency: 'USD'} == Money.times(five, 2)
+    assert %Money{amount: 15, currency: 'USD'} == Money.times(five, 3)
+  end
+
   test "dollar equality" do
     assert Money.equals(%Dollar{amount: 5}, %Dollar{amount: 5})
     assert !Money.equals(%Dollar{amount: 5}, %Dollar{amount: 6})
@@ -21,10 +27,5 @@ defmodule MoneyTest do
 
   test "dollar and franc equality" do
     assert !Money.equals(%Dollar{amount: 5}, %Franc{amount: 5})
-  end
-
-  test "currency" do
-    assert "USD" == Money.currency(%Dollar{amount: 0})
-    assert "CHF" == Money.currency(%Franc{amount: 0})
   end
 end
