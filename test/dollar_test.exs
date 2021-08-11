@@ -10,4 +10,9 @@ defmodule DollarTest do
     fifteen = Dollar.times(five, 3)
     assert 15 == fifteen.amount
   end
+
+  test "equality" do
+    assert Dollar.equals(%Dollar{amount: 5}, %Dollar{amount: 5})
+    assert !Dollar.equals(%Dollar{amount: 5}, %Dollar{amount: 6})
+  end
 end
