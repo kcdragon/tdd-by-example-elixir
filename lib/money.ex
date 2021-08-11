@@ -2,14 +2,14 @@ defmodule Money do
   defstruct [:amount, :currency]
 
   def dollar(amount) do
-    %Money{amount: amount, currency: 'USD'}
+    %Money{amount: amount, currency: "USD"}
   end
 
   def franc(amount) do
-    %Money{amount: amount, currency: 'CHF'}
+    %Money{amount: amount, currency: "CHF"}
   end
 
-  def sum(money, money) do
+  def plus(money, money) do
     %Money{amount: money.amount + money.amount, currency: money.currency}
   end
 

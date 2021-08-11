@@ -4,7 +4,14 @@ defmodule MoneyTest do
 
   test "simple addition" do
     five = Money.dollar(5)
-    assert Money.sum(five, five) == Money.dollar(10)
+    assert Money.plus(five, five) == Money.dollar(10)
+  end
+
+  test "addition with bank" do
+    five = Money.dollar(5)
+    sum = Money.plus(five, five)
+    reduced = Bank.reduce(sum, "USD")
+    assert Money.dollar(10) == reduced
   end
 
   test "multiplication" do
