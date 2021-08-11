@@ -28,6 +28,16 @@ defmodule MoneyTest do
     assert Money.dollar(1) == result
   end
 
+  test "reduce money, different currency" do
+    bank = Bank.add_rate(%Bank{}, "CHF", "USD", 2)
+    result = Bank.reduce(Money.franc(2), "USD", bank)
+    assert Money.dollar(1) == result
+  end
+
+  test "identity rate" do
+    assert 1 == Bank.rate(%Bank{}, "USD", "USD")
+  end
+
   test "multiplication" do
     five = Money.dollar(5)
     assert Money.dollar(10) == Money.times(five, 2)

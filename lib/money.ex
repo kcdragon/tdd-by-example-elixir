@@ -20,4 +20,9 @@ defmodule Money do
   def equals(money, other_money) do
     money.amount == other_money.amount && money.currency == other_money.currency
   end
+
+  def reduce(money, bank, target_currency) do
+    rate = Bank.rate(bank, money.currency, target_currency)
+    %Money{amount: money.amount / rate, currency: target_currency}
+  end
 end
