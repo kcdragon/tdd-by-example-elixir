@@ -2,6 +2,11 @@ defmodule MoneyTest do
   use ExUnit.Case
   doctest Money
 
+  test "simple addition" do
+    five = Money.dollar(5)
+    assert Money.sum(five, five) == Money.dollar(10)
+  end
+
   test "multiplication" do
     five = Money.dollar(5)
     assert Money.dollar(10) == Money.times(five, 2)

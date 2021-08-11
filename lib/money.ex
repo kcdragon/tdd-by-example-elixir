@@ -9,8 +9,12 @@ defmodule Money do
     %Money{amount: amount, currency: 'CHF'}
   end
 
-  def times(dollar, multiplier) do
-    %Money{amount: dollar.amount * multiplier, currency: dollar.currency}
+  def sum(money, money) do
+    %Money{amount: money.amount + money.amount, currency: money.currency}
+  end
+
+  def times(money, multiplier) do
+    %Money{amount: money.amount * multiplier, currency: money.currency}
   end
 
   def equals(money, other_money) do
