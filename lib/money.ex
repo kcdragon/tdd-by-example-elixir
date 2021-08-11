@@ -13,8 +13,11 @@ defmodule Money do
     %Sum{augend: money, addend: other_money}
   end
 
-  def times(money, multiplier) do
-    %Money{amount: money.amount * multiplier, currency: money.currency}
+  def times(expression, multiplier) do
+    case expression do
+      %Money{} -> %Money{amount: expression.amount * multiplier, currency: expression.currency}
+      %Sum{} -> %Sum{augend: Money.times(expression.augend, multiplier), addend: Money.times(expression.addend, multiplier)}
+    end
   end
 
   def equals(money, other_money) do

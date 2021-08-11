@@ -18,6 +18,24 @@ defmodule MoneyTest do
     assert Money.dollar(10) == reduced
   end
 
+  test "sum plus money" do
+    five_bucks = Money.dollar(5)
+    ten_francs = Money.franc(10)
+    bank = Bank.add_rate(%Bank{}, "CHF", "USD", 2)
+    sum = Money.plus(Money.plus(five_bucks, ten_francs), five_bucks)
+    result = Bank.reduce(sum, bank, "USD")
+    assert Money.dollar(15) == result
+  end
+
+  test "sum times" do
+    five_bucks = Money.dollar(5)
+    ten_francs = Money.franc(10)
+    bank = Bank.add_rate(%Bank{}, "CHF", "USD", 2)
+    sum = Money.times(Money.plus(five_bucks, ten_francs), 2)
+    result = Bank.reduce(sum, bank, "USD")
+    assert Money.dollar(20) == result
+  end
+
   test "plus returns sum" do
     five = Money.dollar(5)
     sum = Money.plus(five, five)
