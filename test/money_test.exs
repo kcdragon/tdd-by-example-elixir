@@ -22,4 +22,9 @@ defmodule MoneyTest do
   test "dollar and franc equality" do
     assert !Money.equals(%Dollar{amount: 5}, %Franc{amount: 5})
   end
+
+  test "currency" do
+    assert "USD" == Money.currency(%Dollar{amount: 0})
+    assert "CHF" == Money.currency(%Franc{amount: 0})
+  end
 end
